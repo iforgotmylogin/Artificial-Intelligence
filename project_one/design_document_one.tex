@@ -17,10 +17,59 @@
 \maketitle
 
 \section{System Requirements}
-We are going to design a system that will be able to read a Sudoku puzzle and solve it. 
-Implementation of such a system will include different heuristics in combination with a 
-backtracking search designed to solve Sudoku. More specifically, three separate interactions 
-with backtracking search, with different heuristics for each. This method will be tested on sample puzzles.  
+This system is designed to read and solve a Sudoku puzzle. 
+The first requirement is that the system must accept a specified 
+set of parameters as input. These parameters consist of the group 
+ID, the algorithm type, the puzzle type, and the path to the puzzle 
+input file. To satisfy this requirement, a dedicated Jupyter Notebook 
+cell will be implemented to collect these variables at the start of 
+execution, after which they will be stored as global values and used 
+consistently throughout the system. This ensures a standardized interface 
+for controlling solver behavior.
+
+The second requirement is that the system must be capable of reading 
+a Sudoku puzzle from an input file. This means that the program must 
+correctly interpret the path parameter, open the file, and parse its 
+contents into an internal representation. Each input file is a plain-text 
+document containing a 9×9 grid, where “?” symbols represent unknown 
+values and digits represent fixed ones. To achieve this, the system will 
+include a parser function that validates the format and converts the 
+file into a two-dimensional Python list, thereby providing a structured 
+puzzle state for subsequent processing. This design guarantees both 
+robustness to malformed input and compatibility across all provided files.
+
+The third requirement is that the system must solve puzzles of varying 
+difficulty, specifically easy, medium, hard, and extreme. This requirement 
+implies that the solver must be general enough to handle complex constraint 
+interactions and not be limited to baseline cases. To meet this condition, 
+the system will be validated on all sixteen provided puzzles, with four 
+examples drawn from each difficulty level. Successful performance across 
+this spectrum will demonstrate that the solver is both flexible and robust.
+
+The fourth requirement is that the system must support multiple solving 
+algorithms. These include simple backtracking, backtracking with forward 
+checking, backtracking with arc consistency, local search using simulated 
+annealing with the minimum-conflict heuristic, and local search using a 
+genetic algorithm with a penalty function and tournament selection. This 
+requirement necessitates a modular solver architecture, in which each 
+algorithm is implemented independently but accessed through a unified 
+interface. The algorithm type specified by the user will determine which 
+method is executed. Such a design not only satisfies the current project 
+specifications but also enables future extension by incorporating additional 
+algorithms without altering the solver’s core structure.
+
+The final requirement is that the solved Sudoku puzzle must be saved as 
+an output file in the same directory as the Jupyter Notebook. This 
+requirement implies that the system must generate a text file solution 
+in the same format as the input, thereby allowing for straightforward 
+validation. To accomplish this, the program will include an output 
+function that creates a new text file, names it according to the chosen 
+parameters, and writes the completed 9×9 grid to it. This ensures that 
+each solution is preserved in a consistent, reproducible manner.
+
+Together, these requirements define a flexible and modular Sudoku 
+solver capable of handling diverse puzzle types and algorithmic 
+strategies while maintaining input–output consistency and reproducibility.
 \section{System Architecture}
 \section{System Flow}
 \section{Test Strategy}
